@@ -24,6 +24,7 @@ typedef struct{
   int b;
 }rgb;
 
+boolean rainbowOff = false;
 int rainbow=0;
 // Input a value 0 to 255 to get a color value.
 // The colours are a transition r - g - b - back to r.
@@ -71,15 +72,16 @@ void rainbowFade()
                    strip.Show();
                    delay(20);
                   }
-
+             rainbowOff = true;
              
         }      
 
-     if(rainbow == 0)
+     if(rainbow == 0 && rainbowOff == true)
        {
         for (int i=0; i < PixelCount; i++) {
         strip.SetPixelColor(i,RgbColor(0,0,0));}
         strip.Show();
+        rainbowOff = false;
        }
     }
 BLYNK_WRITE(V4)
