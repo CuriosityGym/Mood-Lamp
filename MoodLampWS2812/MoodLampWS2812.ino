@@ -128,7 +128,7 @@ void setup() {
   Blynk.config(auth);
   while (Blynk.connect() == false) {}
   //ArduinoOTA.setHostname("xxxxxxx"); // OPTIONAL
-   timer.setInterval(8000L, rainbowFade);
+   timer.setInterval(6500L, rainbowFade);
   ArduinoOTA.begin();
 }
 
