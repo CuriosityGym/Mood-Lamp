@@ -21,6 +21,7 @@ int blue=0;
 //int i = 0;
 //int decColour=0; 
 int rainbow=0;
+boolean rainbowOff = false;
 BlynkTimer timer;
 void setColourRgb(unsigned int red, unsigned int green, unsigned int blue) {
   analogWrite(redPin, red);
@@ -59,13 +60,13 @@ void rainbowFade()
       delay(10);
     }
   }
-
+   rainbowOff = true;
     } 
 
-  if(rainbow == 0)
+  if(rainbow == 0 && rainbowOff == true)
     {
        setColourRgb(0,0,0);
-      
+      rainbowOff = false;
     }
     }
 BLYNK_WRITE(V4)
@@ -81,6 +82,8 @@ BLYNK_WRITE(V4)
 
 void setup() {
    // Start off with the LED off.
+  setColourRgb(255,0,0);
+  delay(1000);
   setColourRgb(0,0,0);
     WiFiManager wifiManager;
    //wifiManager.resetSettings();
@@ -90,7 +93,9 @@ void setup() {
      //Serial.println(WiFi.psk().c_str());
     //String ssid1 = WiFi.SSID().c_str();
     wifiManager.setConfigPortalTimeout(180);  // after 3 minutes try to autoconnect again
-  
+    setColourRgb(0,255,0);
+    delay(1000);
+    setColourRgb(0,0,0);
  // Blynk.begin(auth, ssid, pass);
   Blynk.config(auth);
   while (Blynk.connect() == false) {}
