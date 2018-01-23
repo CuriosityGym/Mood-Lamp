@@ -1,4 +1,3 @@
-
 #include <ArduinoOTA.h>
 #include <ESP8266WiFi.h>
 #include <BlynkSimpleEsp8266.h>
@@ -103,6 +102,13 @@ BLYNK_WRITE(V4)
 void setup() {
   strip.Begin();
     strip.Show();
+    for (int i=0; i < PixelCount; i++) {
+        strip.SetPixelColor(i,RgbColor(255,0,0));}
+        strip.Show();
+        delay(1000);
+    for (int i=0; i < PixelCount; i++) {
+        strip.SetPixelColor(i,RgbColor(0,0,0));}
+        strip.Show();
     WiFiManager wifiManager;
   // wifiManager.resetSettings();
      wifiManager.autoConnect("CG Mood Lamp");
@@ -111,7 +117,13 @@ void setup() {
      //Serial.println(WiFi.psk().c_str());
     //String ssid1 = WiFi.SSID().c_str();
     wifiManager.setConfigPortalTimeout(180);  // after 3 minutes try to autoconnect again
-  
+    for (int i=0; i < PixelCount; i++) {
+        strip.SetPixelColor(i,RgbColor(0,255,0));}
+        strip.Show();
+        delay(1000);
+    for (int i=0; i < PixelCount; i++) {
+        strip.SetPixelColor(i,RgbColor(0,0,0));}
+        strip.Show();
  // Blynk.begin(auth, ssid, pass);
   Blynk.config(auth);
   while (Blynk.connect() == false) {}
